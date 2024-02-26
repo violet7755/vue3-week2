@@ -1,18 +1,17 @@
 import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
-
+const baseUrl = "https://vue3-course-api.hexschool.io/v2/";
+const apiPath = 'violet7755';
 
 const app = {
   data(){
     return {
-      apiUrl: 'https://vue3-course-api.hexschool.io/v2',
-      apiPath: 'violet7755',
-      products: [],
-      tempProduct: {}
+      tempProduct: {},
+      products: {}
     }
   },
   methods: {
     checkAdmin() {
-      const url = `${this.apiUrl}/api/user/check`;
+      const url = `${baseUrl}api/user/check`;
       axios.post(url)
         .then(() => {
           this.getProducts();
@@ -23,7 +22,7 @@ const app = {
         })
     },
     getProducts(){
-      const url = `${this.apiUrl}/api/${this.apiPath}/admin/products`;
+      const url = `${baseUrl}api/${apiPath}/admin/products/all`;
       axios.get(url)
         .then((res) => {
           this.products = res.data.products;
